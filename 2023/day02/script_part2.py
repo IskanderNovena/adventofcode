@@ -3,12 +3,12 @@ import re
 # input_file = 'example_part1.txt'
 input_file = 'puzzle_input.txt'
 
-# only 12 red cubes, 13 green cubes, and 14 blue cubes
-max_cubes_in_bag = {
-    'red': 12,
-    'green': 13,
-    'blue': 14
-}
+# # only 12 red cubes, 13 green cubes, and 14 blue cubes
+# max_cubes_in_bag = {
+#     'red': 12,
+#     'green': 13,
+#     'blue': 14
+# }
 
 # Read the file
 with open(input_file) as f:
@@ -30,20 +30,19 @@ for _line in data.splitlines():
                 pattern.match(_line).group('sets'))]),
             'blue': max([eval(i) for i in p_blue.findall(
                 pattern.match(_line).group('sets'))]),
+            'power': max([eval(i) for i in p_red.findall(
+                pattern.match(_line).group('sets'))]) *
+            max([eval(i) for i in p_green.findall(
+                pattern.match(_line).group('sets'))]) *
+            max([eval(i) for i in p_blue.findall(
+                pattern.match(_line).group('sets'))])
         }
     )
-    # print(int(pattern.match(_line).group('id')))
-    # print([eval(i) for i in p_red.findall(
-    #     pattern.match(_line).group('sets'))])
-    # print([eval(i) for i in p_green.findall(
-    #     pattern.match(_line).group('sets'))])
-    # print([eval(i) for i in p_blue.findall(
-    #     pattern.match(_line).group('sets'))])
-    # print()
 
-matching_games = list(filter(
-    lambda set: set['red'] <= max_cubes_in_bag['red'] and set['blue'] <= max_cubes_in_bag['blue'] and set['green'] <= max_cubes_in_bag['green'], games))
+# matching_games = list(filter(
+#     lambda set: set['red'] <= max_cubes_in_bag['red'] and set['blue'] <= max_cubes_in_bag['blue'] and set['green'] <= max_cubes_in_bag['green'], games))
 
-answer = sum(map(lambda x: x['id'], matching_games))
+# answer = sum(map(lambda x: x['id'], matching_games))
+answer = sum(map(lambda x: x['power'], games))
 
 print(f'Answer: {answer}')
