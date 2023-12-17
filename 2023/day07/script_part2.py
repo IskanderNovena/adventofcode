@@ -69,11 +69,6 @@ def getHand(hand, bid):
     highest_wildcard_count = sum(item['count'] for item in list(filter(
         lambda x: x['card'] == highest_regular_card['card'] or x['card'] == 'J', card_count)))
 
-    if debug and hand == 'J222Q':
-        print('---')
-        print(highest_regular_card)
-        print(sorted_card_count)
-        print('---')
     match highest_wildcard_count:
         case 5:
             hand_type = hand_types['five-of-a-kind']
