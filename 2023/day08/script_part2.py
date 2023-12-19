@@ -48,12 +48,7 @@ for node in start_nodes:
         current_node = getNextNode(current_node, instructions[idx])
         if current_node['node'][-1] == 'Z':
             arrived = True
-            step_array.append(
-                {
-                    'node': node,
-                    'steps': steps,
-                }
-            )
+            step_array.append(steps)
             if debug:
                 print(f'Steps for node {current_node["node"]}: {steps}')
         else:
@@ -64,7 +59,6 @@ for node in start_nodes:
 if debug:
     print(f'Step array:\n{step_array}')
 
-answer = math.lcm(step_array[0]['steps'], step_array[1]['steps'], step_array[2]['steps'],
-                  step_array[3]['steps'], step_array[4]['steps'], step_array[5]['steps'])
+answer = math.lcm(*step_array)
 
 print(f'Answer: {answer}')
